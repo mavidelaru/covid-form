@@ -19,9 +19,14 @@ export class BodyComponent implements OnInit {
   done: boolean = false;
 
    ngOnInit() {
+    console.log(this.done);
+
     if (this.done === true) {
+
       const button = document.getElementById('body-button');
+      
       button.style.display = 'none';
+
     }
   }
 
@@ -29,7 +34,7 @@ export class BodyComponent implements OnInit {
     this.router.navigate(['form']);
   }
 
-  // formDone(done) {
-  //   done = this.done;
-  // }
+   closeButton(done) {
+     done = this.done;
+  }
 }

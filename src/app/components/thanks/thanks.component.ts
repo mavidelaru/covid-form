@@ -13,6 +13,11 @@ export class ThanksComponent {
  quest2 = this.formService.quest2;
  quest3 = this.formService.quest3;
 
+
+ formDone(){
+
+ }
+ 
   constructor(
 
     private formService: FormService,
