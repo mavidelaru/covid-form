@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormService } from '../../services/form.service';
 import { Router } from '@angular/router';
 import { ValidationService } from '../../services/validation.service';

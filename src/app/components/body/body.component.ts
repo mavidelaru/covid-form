@@ -1,11 +1,9 @@
-import { Injectable, OnInit } from '@angular/core';
+import {  OnInit } from '@angular/core';
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root',
-})
+
 
 @Component({
   selector: 'app-body',
@@ -16,7 +14,7 @@ import { Router } from '@angular/router';
 export class BodyComponent implements OnInit {
   constructor(private router: Router) {}
 
-  done: boolean = false;
+  // done: boolean = false;
 
   ngOnInit() {
     alert('hola');
@@ -31,7 +29,7 @@ export class BodyComponent implements OnInit {
     this.router.navigate(['form']);
   }
 
-  formDone(done) {
-    done = this.done;
-  }
+  // formDone(done) {
+  //   done = this.done;
+  // }
 }

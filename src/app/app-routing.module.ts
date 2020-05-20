@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FormComponent } from './components/form/form.component';
-import { BodyComponent } from './components/Body/body.component';
+import { BodyComponent } from './components/body/body.component';
 import { ResultComponent } from './components/result/result.component';
 import { ThanksComponent } from './components/thanks/thanks.component';
 

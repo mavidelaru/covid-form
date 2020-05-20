@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 // Componentes
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component'
-import { BodyComponent } from './components/Body/body.component';
+import { BodyComponent } from './components/body/body.component';
 import { FormComponent } from './components/form/form.component';
 import { ResultComponent } from './components/result/result.component';
 import { ThanksComponent } from './components/thanks/thanks.component';
