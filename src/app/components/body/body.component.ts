@@ -1,9 +1,11 @@
-import {  OnInit } from '@angular/core';
 
-import { Component } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 
-
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-body',
@@ -14,15 +16,13 @@ import { Router } from '@angular/router';
 export class BodyComponent implements OnInit {
   constructor(private router: Router) {}
 
-  // done: boolean = false;
+  done: boolean = false;
 
-  ngOnInit() {
-    alert('hola');
-
-    // if (this.done === true) {
-    //   const button = document.getElementById('body-button');
-    //   button.style.display = 'none';
-    // }
+   ngOnInit() {
+    if (this.done === true) {
+      const button = document.getElementById('body-button');
+      button.style.display = 'none';
+    }
   }
 
   goForm() {
