@@ -1,4 +1,5 @@
 {
     "user": "john@dcrealogix.com",
-    "password": "123"
+    "password": "123",
+    "done": false
 }

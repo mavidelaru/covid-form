@@ -2,18 +2,19 @@
     <form>
         <h1>Form</h1>
 
-        <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+        <div id='form-content'>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
 
-            <strong>Something is wrong!</strong> You should fill all the form
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <strong>Something is wrong!</strong> You should fill all the form
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-        </div>
+            </div>
 
 
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select #number class="form-control" id="exampleFormControlSelect1">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Example select</label>
+                <select #number class="form-control" id="exampleFormControlSelect1">
 
                 <option>1</option>
                 <option>2</option>
@@ -22,19 +23,20 @@
                 <option>5</option>
 
              </select>
-        </div>
+            </div>
 
 
-        <div class="form-group">
-            <label for="formControlRange">Example Range input</label>
-            <input #number2 type="range" class="form-control" id="formControlRange">
-        </div>
+            <div class="form-group">
+                <label for="formControlRange">Example Range input</label>
+                <input #number2 type="range" class="form-control" id="formControlRange">
+            </div>
 
 
 
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Do you want to add something?</label>
-            <textarea #text1 type="text" class="form-control" rows="3"></textarea>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Do you want to add something?</label>
+                <textarea #text1 type="text" class="form-control" rows="3"></textarea>
+            </div>
         </div>
 
     </form>

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ValidationService } from './validation.service';
 import { BodyComponent } from '../components/body/body.component';
+import { BindingFlags } from '@angular/compiler/src/core';
+// import { data } from '../services/data.json';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class FormService {
   quest1: number[] = [];
   quest2: number[] = [];
   quest3: any[] = [];
-  done: boolean = false;
+  flag: boolean = false;
 
   getAnswer(answerA, answerB, answerC){
 
@@ -21,11 +23,13 @@ export class FormService {
 
     this.quest3.push(answerC);
 
-    this.validationService.notAnswered(answerA, answerB, answerC);
+     this.flag =  this.validationService.notAnswered(answerA, answerB, answerC);
 
-    this.done = true;
 
-  
+    console.log(this.flag)
+
+    return this.flag;
+
   }
 
 
