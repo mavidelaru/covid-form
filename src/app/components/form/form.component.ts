@@ -12,6 +12,8 @@ import { ValidationService } from '../../services/validation.service';
 
 export class FormComponent implements OnInit {
   done: boolean = false;
+  content;
+
 
   getAnswers(answerA, answerB, answerC) {
 
@@ -26,6 +28,14 @@ export class FormComponent implements OnInit {
     this.router.navigate(['thanks']);
   }
 
+  checkDonne(){
+    this.content = document.getElementById('form-content');
+    
+    let display = (this.done ===  true)  ? 'none' : 'block';
+    this.content.style.display = display;
+
+  }
+
 
   constructor(
     private formService: FormService,
@@ -35,12 +45,9 @@ export class FormComponent implements OnInit {
 
   ngOnInit(){
 
-  if (this.done === true) {
+    console.log("llamando al servicio por la flag es "+this.formService.flag);
 
-    //  const content = document.getElementById('form-content');
-    // content.style.display = 'none';
 
-  }
-
+  
 }
 }

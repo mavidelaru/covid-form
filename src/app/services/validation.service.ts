@@ -12,7 +12,6 @@ export class ValidationService {
     const answers = [answerA, answerB, answerC];
     let flag = true;
 
-
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < element.length; i++) {
       if (answers[i] == null || answers[i] === '') {

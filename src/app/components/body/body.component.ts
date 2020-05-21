@@ -11,8 +11,16 @@ import { Injectable } from '@angular/core';
   styleUrls: ['./body.component.sass'],
 })
 export class BodyComponent {
+
+  done = 'false' ;
+  
+
   goForm() {
     this.router.navigate(['form']);
+    
   }
+
+  
+
   constructor(private router: Router) {}
 }
