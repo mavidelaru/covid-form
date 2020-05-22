@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormService } from '../../services/form.service';
 import { Router } from '@angular/router';
 import { ValidationService } from '../../services/validation.service';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+
 
 @Component({
   selector: 'app-form',
@@ -12,10 +14,22 @@ import { ValidationService } from '../../services/validation.service';
 
 export class FormComponent implements OnInit {
   done: boolean = false;
+
   content;
 
+  langs: string[] = [
+    'English',
+    'Spanish'
+  ]
 
-  getAnswers(answerA, answerB, answerC) {
+ myform: FormGroup;
+
+// -----------------------------------------------------
+ 
+onSubmit(){
+alert(`Tu nombre es  ${this.myform.value }`);
+}
+  getAnswer(answerA, answerB, answerC) {
 
     this.done = this.formService.getAnswer(answerA, answerB, answerC);
 
@@ -30,12 +44,9 @@ export class FormComponent implements OnInit {
 
   checkDonne(){
     this.content = document.getElementById('form-content');
-    
-    let display = (this.done ===  true)  ? 'none' : 'block';
+    const display = (this.done ===  true)  ? 'none' : 'block';
     this.content.style.display = display;
-
   }
-
 
   constructor(
     private formService: FormService,
@@ -43,11 +54,19 @@ export class FormComponent implements OnInit {
     private validationService: ValidationService,
   ) {}
 
+// ---------------------------------------------------
+
   ngOnInit(){
 
-    console.log("llamando al servicio por la flag es "+this.formService.flag);
+  this.myform = new FormGroup({
+    name: new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required)
+    }),
+    email: new FormControl('', [Validators.required,
+                                Validators.pattern('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/')]),
+    language: new FormControl('', Validators.required)
+  });
 
-
-  
 }
 }

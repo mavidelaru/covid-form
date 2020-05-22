@@ -9,18 +9,18 @@ import { BodyComponent } from '../components/body/body.component';
 
 export class FormService {
 
-  quest1: number[] = [];
-  quest2: number[] = [];
-  quest3: any[] = [];
+  quest1: number;
+  quest2: number;
+  quest3: any;
   flag: boolean = false;
 
   getAnswer(answerA, answerB, answerC){
 
-    this.quest1.push(answerA);
+    this.quest1 = answerA;
 
-    this.quest2.push(answerB);
+    this.quest2 =  answerB;
 
-    this.quest3.push(answerC);
+    this.quest3 = answerC;
 
     this.flag =  this.validationService.notAnswered(answerA, answerB, answerC);
 
@@ -30,8 +30,6 @@ export class FormService {
     return this.flag;
 
   }
-
-
 
 
   constructor(

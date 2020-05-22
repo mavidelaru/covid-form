@@ -1,18 +1,54 @@
 <div class="container mt-5">
-    <form>
-        <h1>Form</h1>
 
-        <div id='form-content'>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+    <h1>Form</h1>
 
-                <strong>Something is wrong!</strong> You should fill all the form
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+
+        <strong>Something is wrong!</strong> You should fill all the form
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+
+    <form [formGroup]="myform" (ngSubmit)="onSubmit()">
+
+        <fieldset formGroupName="name">
+
+            <div class="form-group">
+                <label>Name</label>
+                <input type="firstName" class="form-control" formControlName="firstName" required>
             </div>
 
 
             <div class="form-group">
+                <label>Surname</label>
+                <input type="lastName" class="form-control" formControlName="lastName" required>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" formControlName="email" required>
+            </div>
+        </fieldset>
+
+        <fieldset>
+
+            <div class="form-group">
+
+                <label>Please select a language</label>
+
+                <select class='form-control' formControlName="language">
+          <option *ngFor='let lang of langs' [value]='lang'>{{lang}}</option>
+                </select>
+            </div>
+
+        </fieldset>
+
+
+        <!-- 
                 <label for="exampleFormControlSelect1">Example select</label>
                 <select #number class="form-control" id="exampleFormControlSelect1">
 
@@ -36,10 +72,12 @@
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Do you want to add something?</label>
                 <textarea #text1 type="text" class="form-control" rows="3"></textarea>
-            </div>
-        </div>
+            </div>-->
 
+
+        <button type="button" class="btn btn-warning mt-3" type="submit">Submit</button>
+
+        <!-- <button type="button" class="btn btn-warning mt-3" type="submit" (click)="getAnswers(number.value, number2.value, text1.value)">Submit</button> -->
+        <pre>{{ myform.value | json}}</pre>
+        <pre>Dirty? {{ myform.controls.email.dirty }}</pre>
     </form>
-
-    <button type="button" class="btn btn-warning mt-3" type="submit" (click)="getAnswers(number.value, number2.value, text1.value)">Submit</button>
-</div>
