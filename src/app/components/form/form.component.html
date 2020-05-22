@@ -2,7 +2,13 @@
 
     <h1>Form</h1>
 
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert">
+    <!-- Alert warning -->
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert" *ngIf="(firstName.invalid && firstName.dirty) ||
+          (lastName.invalid && lastName.dirty) ||
+          (email.invalid && email.dirty) ||
+          (language.invalid && language.dirty)
+    ">
 
         <strong>Something is wrong!</strong> You should fill all the form
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -10,41 +16,59 @@
     </button>
     </div>
 
+    <!-- Form start -->
     <form [formGroup]="myform" (ngSubmit)="onSubmit()">
 
+        <!-- Name + surname fieldset -->
         <fieldset formGroupName="name">
-
-            <div class="form-group">
+            <!-- Name input -->
+            <div class="form-group" [ngClass]="{
+                'has-danger':firstName.invalid && firstName.dirty,
+                'has-success':firstName.valid && firstName.dirty
+            }">
                 <label>Name</label>
                 <input type="firstName" class="form-control" formControlName="firstName" required>
             </div>
 
-
-            <div class="form-group">
+            <!-- Surname input -->
+            <div class="form-group" [ngClass]="{
+                'has-danger':lastName.invalid && lastName.dirty,
+                'has-success':lastName.valid && lastName.dirty
+                 }">
                 <label>Surname</label>
                 <input type="lastName" class="form-control" formControlName="lastName" required>
+
+                <div class='mt-3 form-control-feedback' *ngIf="lastName.errors && (lastName.invalid && lastName.dirty)">
+                    <p *ngIf="lastName.errors.required">Last name is required</p>
+                    <p *ngIf="lastName.errors.minlength">Last Name must be 8 caracthers lon minimum. We need {{lastName.errors.minlength.requiredLength - lastName.errors.minlength.actualLength}}</p>
+                </div>
             </div>
+
 
         </fieldset>
 
         <fieldset>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{
+                'has-danger': email.invalid && email.dirty,
+                'has-success': email.valid && email.dirty
+            }">
                 <label>Email</label>
                 <input type="email" class="form-control" formControlName="email" required>
             </div>
         </fieldset>
 
         <fieldset>
-
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{
+                'has-danger':language.invalid && language.dirty,
+                'has-success':language.valid && language.dirty
+            }">
 
                 <label>Please select a language</label>
 
                 <select class='form-control' formControlName="language">
           <option *ngFor='let lang of langs' [value]='lang'>{{lang}}</option>
-                </select>
+        </select>
             </div>
-
         </fieldset>
 
 
@@ -79,5 +103,8 @@
 
         <!-- <button type="button" class="btn btn-warning mt-3" type="submit" (click)="getAnswers(number.value, number2.value, text1.value)">Submit</button> -->
         <pre>{{ myform.value | json}}</pre>
-        <pre>Dirty? {{ myform.controls.email.dirty }}</pre>
+        <pre>Name? {{ myform.controls.name.valid }}</pre>
+
+        <pre>Dirty? {{ myform.controls.email.valid }}</pre>
+
     </form>

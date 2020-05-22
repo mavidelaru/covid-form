@@ -23,11 +23,17 @@ export class FormComponent implements OnInit {
   ]
 
  myform: FormGroup;
+   firstName: FormControl;
+   lastName: FormControl;
+   email: FormControl;
+   language: FormControl;
+
 
 // -----------------------------------------------------
  
 onSubmit(){
 alert(`Tu nombre es  ${this.myform.value }`);
+this.router.navigate(['thanks']);
 }
   getAnswer(answerA, answerB, answerC) {
 
@@ -57,16 +63,35 @@ alert(`Tu nombre es  ${this.myform.value }`);
 // ---------------------------------------------------
 
   ngOnInit(){
+    this.createFormControls();
+    this.createForm();
+  }
+
+  createFormControls(){
+
+        this.firstName = new FormControl('', [Validators.required,
+                                              Validators.minLength(2)]);
+        this.lastName = new FormControl('', [Validators.required,
+                                              Validators.minLength(8)]);
+
+        this.email = new FormControl('', [Validators.required,
+                                          Validators.pattern("[^ @]*@[^ @]*")
+                                        ]);
+        this.language = new FormControl('', Validators.required);
+
+  }
+
+  createForm(){
 
   this.myform = new FormGroup({
     name: new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required)
+      firstName: this.firstName,
+      lastName: this.lastName
     }),
-    email: new FormControl('', [Validators.required,
-                                Validators.pattern('/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/')]),
-    language: new FormControl('', Validators.required)
+    email: this.email,
+    language: this.language
   });
 
-}
+  }
+
 }
