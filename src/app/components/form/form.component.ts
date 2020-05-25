@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormService } from '../../services/form.service';
 import { Router } from '@angular/router';
 import { ValidationService } from '../../services/validation.service';
-import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder, FormControlName} from '@angular/forms';
 import { ThanksComponent } from '../thanks/thanks.component';
 
 
@@ -28,14 +28,19 @@ export class FormComponent implements OnInit {
    lastName: FormControl;
    email: FormControl;
    language: FormControl;
-
+   opinion: FormControl;
+   addSomething: FormControl;
 
 // -----------------------------------------------------
 onSubmit(){
+  if(this.myform.valid){
+    this.goThanks();
+    this.formService.getAnswer(this.firstName.value, this.lastName.value, this.email.value, this.language.value);
+    
+    this.myform.reset();
+  }
 
-alert(`Tu nombre es  ${this.firstName }`);
-this.goThanks();
-this.formService.getAnswer(this.firstName.value, this.lastName.value, this.email.value, this.language.value);
+
 
 }
 
@@ -78,25 +83,32 @@ this.formService.getAnswer(this.firstName.value, this.lastName.value, this.email
         this.firstName = new FormControl('', [Validators.required,
                                               Validators.minLength(2)]);
         this.lastName = new FormControl('', [Validators.required,
-                                              Validators.minLength(8)]);
+                                              Validators.minLength(2)]);
 
         this.email = new FormControl('', [Validators.required,
-                                          Validators.pattern("[^ @]*@[^ @]*")
-                                        ]);
+                                          Validators.pattern('[^ @]*@[^ @]*')]);
+
         this.language = new FormControl('', Validators.required);
+
+        this.opinion = new FormControl('', Validators.required);
+
+        this.addSomething = new FormControl('', [Validators.required,
+                                            Validators.minLength(6)]);
 
   }
 
   createForm(){
 
   this.myform = new FormGroup({
-    name: new FormGroup({
+
       firstName: this.firstName,
-      lastName: this.lastName
-    }),
-    email: this.email,
-    language: this.language
-  });
+      lastName: this.lastName,
+      email: this.email,
+      language: this.language,
+      opinion: this.opinion,
+      addSomething: this.addSomething
+
+    });
 
   }
 

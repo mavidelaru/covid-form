@@ -11,6 +11,8 @@ import { async } from '@angular/core/testing';
 export class ResultComponent implements OnInit {
   obs: any;
   newArray = [1,2,3,4,5,6,7,8,9,20];
+
+  searches;
   
 
   constructor() {}

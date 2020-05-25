@@ -8,7 +8,6 @@ import { FormService } from '../../services/form.service';
 })
 export class ThanksComponent implements OnInit {
 
-
  quest1 ;
  quest2 ;
  quest3 ;

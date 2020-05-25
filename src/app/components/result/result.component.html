@@ -2,6 +2,18 @@
 
     <h1>Results</h1>
 
+
+    <input type="search" class="form-control" placeholder="Please enter your search here">
+
+    <ul>
+        <li *ngFor="let search of searches">{{ search }}</li>
+    </ul>
+
+
+
+
+
+
     <div class="progress">
         <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
     </div>

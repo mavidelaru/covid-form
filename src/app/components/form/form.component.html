@@ -4,103 +4,103 @@
 
     <!-- Alert warning -->
 
-    <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert" *ngIf="(firstName.invalid && firstName.dirty) ||
-          (lastName.invalid && lastName.dirty) ||
-          (email.invalid && email.dirty) ||
-          (language.invalid && language.dirty)">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="alert" *ngIf="myform.errors">
         <strong>Something is wrong!</strong> You should fill all the form
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-    </div> -->
+    </div>
 
 
     <!-- Form start -->
     <form [formGroup]="myform" (ngSubmit)="onSubmit()">
 
         <!-- Name + surname fieldset -->
-        <fieldset formGroupName="name">
+        <div class="row">
+
             <!-- Name input -->
-            <div class="form-group" [ngClass]="{
-                'has-danger':firstName.invalid && firstName.dirty,
-                'has-success':firstName.valid && firstName.dirty
-            }">
+            <div class="form-group col-sm">
                 <label>Name</label>
-                <input type="firstName" class="form-control" formControlName="firstName" required>
+                <input type="firstName" class="form-control" formControlName="firstName" required [ngClass]="{
+                    'is-invalid':firstName.invalid && firstName.dirty,
+                    'is-valid':firstName.valid && firstName.dirty }">
+
+                <div *ngIf="firstName.errors" class="invalid-feedback"> Field is invalid</div>
+
             </div>
 
             <!-- Surname input -->
-            <div class="form-group" [ngClass]="{
-                'has-danger':lastName.invalid && lastName.dirty,
-                'has-success':lastName.valid && lastName.dirty
-                 }">
+            <div class="form-group col-sm">
                 <label>Surname</label>
-                <input type="lastName" class="form-control" formControlName="lastName" required>
+                <input type="lastName" class="form-control" formControlName="lastName" required [ngClass]="{
+                    'is-invalid':lastName.invalid && lastName.dirty,
+                    'is-valid':lastName.valid && lastName.dirty
+                     }">
 
                 <div class='mt-3 form-control-feedback' *ngIf="lastName.errors && (lastName.invalid && lastName.dirty)">
-                    <p *ngIf="lastName.errors.required">Last name is required</p>
-                    <p *ngIf="lastName.errors.minlength">Last Name must be 8 caracthers lon minimum. We need {{lastName.errors.minlength.requiredLength - lastName.errors.minlength.actualLength}}</p>
+
                 </div>
+
             </div>
 
+        </div>
 
-        </fieldset>
 
-        <fieldset>
-            <div class="form-group" [ngClass]="{
-                'has-danger': email.invalid && email.dirty,
-                'has-success': email.valid && email.dirty
-            }">
+        <div class="row">
+            <!-- Email -->
+            <div class="form-group col-sm">
                 <label>Email</label>
-                <input type="email" class="form-control" formControlName="email" required>
+                <input type="email" class="form-control" formControlName="email" required [ngClass]="{
+                    'is-invalid': email.invalid && email.dirty,
+                    'is-valid': email.valid && email.dirty }">
+
+                <p class="invalid-feedback" *ngIf="email.errors">Field required</p>
             </div>
-        </fieldset>
 
-        <fieldset>
-            <div class="form-group" [ngClass]="{
-                'has-danger':language.invalid && language.dirty,
-                'has-success':language.valid && language.dirty
-            }">
+            <!-- Language -->
+            <div class="form-group col-sm">
 
-                <label>Please select a language</label>
-
-                <select class='form-control' formControlName="language">
-          <option *ngFor='let lang of langs' [value]='lang'>{{lang}}</option>
-        </select>
+                <label>Language</label>
+                <select class='form-control' formControlName="language" [ngClass]="{
+                    'is-invalid':language.invalid && language.dirty,
+                    'is-valid':language.valid && language.dirty }">
+                     <option *ngFor='let lang of langs' [value]='lang'>{{lang}}</option>
+                </select>
+                <p class="invalid-feedback" *ngIf="language.errors">Field required</p>
             </div>
-        </fieldset>
 
+            <!-- Opinion -->
+            <div class="col-sm">
 
-        <!-- 
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select #number class="form-control" id="exampleFormControlSelect1">
+                <label for="exampleFormControlSelect1">Opinion</label>
+                <select #number class="form-control" formControlName="opinion" required [ngClass]="{
+                    'is-invalid':opinion.invalid && opinion.dirty,
+                    'is-valid':opinion.valid && opinion.dirty }">
 
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-
              </select>
+                <p class="invalid-feedback" *ngIf="opinion.errors">Field required</p>
+
             </div>
 
+        </div>
 
-            <div class="form-group">
-                <label for="formControlRange">Example Range input</label>
-                <input #number2 type="range" class="form-control" id="formControlRange">
-            </div>
+        <!-- Add something -->
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Do you want to add something?</label>
+            <textarea #text1 type="text" class="form-control" formControlName="addSomething" rows="3" required [ngClass]="{
+                'is-invalid':addSomething.invalid && addSomething.dirty,
+                'is-valid':addSomething.valid && addSomething.dirty }"></textarea>
 
+            <p class="invalid-feedback" *ngIf="addSomething.errors.minLength">Must be 8 caracthers minimum. We need {{addSomething.errors.minlength.requiredLength - addSomething.errors.minlength.actualLength}}</p>
+        </div>
 
+        <button class="btn btn-warning mt-3" type="submit">Submit</button>
 
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Do you want to add something?</label>
-                <textarea #text1 type="text" class="form-control" rows="3"></textarea>
-            </div>-->
-
-
-        <button type="button" class="btn btn-warning mt-3" type="submit">Submit</button>
-
-        <!-- <button type="button" class="btn btn-warning mt-3" type="submit" (click)="getAnswers(number.value, number2.value, text1.value)">Submit</button> -->
 
 
     </form>
