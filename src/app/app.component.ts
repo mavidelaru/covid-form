@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+// import usersFormAnswers from '../app/services/data.json';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,5 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'covid-crealogix';
+  // usersFormAnswers: any = usersFormAnswers;
 }
