@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormService } from '../../services/form.service';
 
 @Component({
@@ -6,18 +6,21 @@ import { FormService } from '../../services/form.service';
   templateUrl: './thanks.component.html',
   styleUrls: ['./thanks.component.sass']
 })
-export class ThanksComponent {
+export class ThanksComponent implements OnInit {
 
 
- quest1 = this.formService.quest1;
- quest2 = this.formService.quest2;
- quest3 = this.formService.quest3;
+ quest1 ;
+ quest2 ;
+ quest3 ;
+ quest4 ;
 
+ ngOnInit(){
+  this.quest1 = this.formService.quest1;
+  this.quest2 = this.formService.quest2;
+  this.quest3 = this.formService.quest3;
+  this.quest4 = this.formService.quest4;
+}
 
- formDone(){
-
- }
- 
   constructor(
 
     private formService: FormService,

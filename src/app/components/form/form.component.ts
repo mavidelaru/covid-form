@@ -3,6 +3,7 @@ import { FormService } from '../../services/form.service';
 import { Router } from '@angular/router';
 import { ValidationService } from '../../services/validation.service';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { ThanksComponent } from '../thanks/thanks.component';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class FormComponent implements OnInit {
   langs: string[] = [
     'English',
     'Spanish'
-  ]
+ ]
 
  myform: FormGroup;
    firstName: FormControl;
@@ -30,23 +31,28 @@ export class FormComponent implements OnInit {
 
 
 // -----------------------------------------------------
- 
 onSubmit(){
-alert(`Tu nombre es  ${this.myform.value }`);
-this.router.navigate(['thanks']);
+
+alert(`Tu nombre es  ${this.firstName }`);
+this.goThanks();
+this.formService.getAnswer(this.firstName.value, this.lastName.value, this.email.value, this.language.value);
+
 }
-  getAnswer(answerA, answerB, answerC) {
 
-    this.done = this.formService.getAnswer(answerA, answerB, answerC);
+  // getAnswer(firstName, lastName, email, language) {
 
-    if (this.validationService.notAnswered(answerA, answerB, answerC) === true) {
-      this.goThanks();
-    }
-  }
+
+  //   // if (this.validationService.notAnswered(answerA, answerB, answerC) === true) {
+  //   //   this.goThanks();
+  //   // }
+  // }
+
 
   goThanks() {
+
     this.router.navigate(['thanks']);
   }
+
 
   checkDonne(){
     this.content = document.getElementById('form-content');

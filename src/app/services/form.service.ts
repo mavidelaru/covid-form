@@ -12,9 +12,10 @@ export class FormService {
   quest1: number;
   quest2: number;
   quest3: any;
+  quest4: any;
   flag: boolean = false;
 
-  getAnswer(answerA, answerB, answerC){
+  getAnswer(answerA, answerB, answerC, answerD){
 
     this.quest1 = answerA;
 
@@ -22,8 +23,9 @@ export class FormService {
 
     this.quest3 = answerC;
 
-    this.flag =  this.validationService.notAnswered(answerA, answerB, answerC);
+    this.quest4 = answerD;
 
+    // this.flag =  this.validationService.notAnswered(answerA, answerB, answerC);
 
     console.log(this.flag)
 
