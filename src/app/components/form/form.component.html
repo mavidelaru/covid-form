@@ -64,8 +64,8 @@
                 <select class='form-control' formControlName="language" [ngClass]="{
                     'is-invalid':language.invalid && language.dirty,
                     'is-valid':language.valid && language.dirty }">
-                     <option *ngFor='let lang of langs' [value]='lang'>{{lang}}</option>
-                </select>
+          <option *ngFor='let lang of langs' [value]='lang'>{{lang}}</option>
+        </select>
                 <p class="invalid-feedback" *ngIf="language.errors">Field required</p>
             </div>
 
@@ -77,12 +77,12 @@
                     'is-invalid':opinion.invalid && opinion.dirty,
                     'is-valid':opinion.valid && opinion.dirty }">
 
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-             </select>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
                 <p class="invalid-feedback" *ngIf="opinion.errors">Field required</p>
 
             </div>

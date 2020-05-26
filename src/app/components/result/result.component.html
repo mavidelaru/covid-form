@@ -1,11 +1,44 @@
 <div class="container mt-5">
 
     <h1>Results</h1>
+    <div class="row" [formGroup]="countryForm">
 
-    <input type="search" class="form-control" placeholder="Please enter your search here" [formControl]="searchField">
 
-    <ul class="mt-3">
-        <li *ngFor="let search of searches">{{ search }}</li>
-    </ul>
+        <select class="form-control col-5 mr-2" id="exampleFormControlSelect1" formControlName="selectField">
+
+      <option *ngFor="let region of regions" value={{region}}> {{region}} </option>
+
+    </select>
+
+        <input type="search" class="form-control col-6  " placeholder="Busca un país en concreto" formControlName="searchField">
+
+    </div>
+
+
+    <div class="mt-5 row justify-content-between">
+
+        <div class="card mb-5" style="width: 18rem;" *ngFor="let country of countries">
+
+            <img class="card-img-top " src={{country.flag}} alt="Card image cap ">
+            <div class="card-body ">
+                <h5 class="card-title ">{{country.name}}</h5>
+                <p class="card-text "> <b>Capital: </b> {{country.capital}}</p>
+            </div>
+
+            <ul class="list-group list-group-flush ">
+                <li class="list-group-item "><b>Languages: </b>
+                    <ul>
+                        <li *ngFor="let language of country.languages">
+                            {{language.name}}</li>
+                    </ul>
+
+                    <li class="list-group-item "> <b>Population: </b> {{country.population|number}}</li>
+
+
+            </ul>
+
+        </div>
+
+    </div>
 
 </div>

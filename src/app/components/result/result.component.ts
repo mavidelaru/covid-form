@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { interval, timer, from, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { async } from '@angular/core/testing';
-import { FormControl } from '@angular/forms';
+// RxJs
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+// Angular
+import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+
+//  Components
+import { ApiCallService } from '../../services/api-call.service';
 
 @Component({
   selector: 'app-result',
@@ -12,32 +15,62 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class ResultComponent implements OnInit {
   obs: any;
-  newArray = [1,2,3,4,5,6,7,8,9,20];
 
+  regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+
+  countryForm: FormGroup;
+  selectField: FormControl;
   searchField: FormControl;
 
-  searches: string[] = [];
+  countries;
 
-  constructor() {}
+  paises;
 
-   ngOnInit() {
 
-    this.searchField = new FormControl();
-    this.searchField.valueChanges
-      .pipe(debounceTime(400))
-      .pipe(distinctUntilChanged())
-      .subscribe(term => {
-        this.searches.push(term);
-      })
+  constructor(private apiCallService: ApiCallService) {}
 
-    // const contador = interval(1000);
 
-    // const takeFourNumbers = contador.pipe(take(4));
+  ngOnInit() {
+    this.selectField = new FormControl(),
+    this.searchField = new FormControl(),
+    this.countryForm = new FormGroup({
+      selectField : this.selectField,
+      searchField : this.searchField,
+    });
+    
+    this.getRegion();
+    // this.searchCountry();
 
-    // console.log('prueba' + contador)
-
-    // takeFourNumbers.subscribe(x => console.log('Next: ',x))
+    // this.countryForm.reset();
 
   }
 
+
+  getRegion(){
+
+    this.selectField.valueChanges.subscribe((region) => {
+
+      this.apiCallService.getRegion(region).subscribe((data) =>{
+
+          console.log(data);
+
+          this.countries = data;
+
+      });
+  });
+
+  }
+
+  searchCountry() {
+
+    this.searchField.valueChanges
+      .pipe(debounceTime(400))
+      .pipe(distinctUntilChanged())
+      .subscribe((term) => {
+        console.log(term);
+        this.apiCallService
+          .getInfo(term)
+          .subscribe((paises) => console.log(paises));
+      });
+  }
 }
