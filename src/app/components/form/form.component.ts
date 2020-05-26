@@ -19,8 +19,8 @@ export class FormComponent implements OnInit {
   content;
 
   langs: string[] = [
-    'English',
-    'Spanish'
+    'Catalan',
+    'Español'
  ]
 
  myform: FormGroup;
@@ -33,14 +33,18 @@ export class FormComponent implements OnInit {
 
 // -----------------------------------------------------
 onSubmit(){
-  if(this.myform.valid){
+  if ( this.myform.valid ){
     this.goThanks();
-    this.formService.getAnswer(this.firstName.value, this.lastName.value, this.email.value, this.language.value);
-    
+    this.formService.getAnswer(
+                          this.firstName.value,
+                          this.lastName.value,
+                          this.email.value,
+                          this.language.value,
+                          this.opinion.value,
+                          this.addSomething.value);
     this.myform.reset();
+
   }
-
-
 
 }
 

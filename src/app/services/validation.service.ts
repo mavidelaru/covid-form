@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class ValidationService {
  
-  notAnswered(answerA, answerB, answerC) {
+  notAnswered(answerA, answerB, answerC, answerD, answerE, answerF) {
 
     const element = document.getElementsByClassName('form-control');
     const alert = document.getElementById('alert');
-    const answers = [answerA, answerB, answerC];
+    const answers = [answerA, answerB, answerC, answerD, answerE, answerF];
     let flag = true;
 
     // tslint:disable-next-line: prefer-for-of
