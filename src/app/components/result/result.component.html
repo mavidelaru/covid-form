@@ -1,25 +1,23 @@
 <div class="container mt-5">
 
     <h1>Results</h1>
-    <div class="row" [formGroup]="countryForm">
-
+    <div class="row justify-content-between" [formGroup]="countryForm">
 
         <select class="form-control col-5 mr-2" id="exampleFormControlSelect1" formControlName="selectField">
-
       <option *ngFor="let region of regions" value={{region}}> {{region}} </option>
-
     </select>
 
-        <input type="search" class="form-control col-6  " placeholder="Busca un país en concreto" formControlName="searchField">
-
+        <input type="search" class="form-control col-6" placeholder="Busca un país en concreto" formControlName="searchField" *ngIf="flag">
     </div>
 
 
     <div class="mt-5 row justify-content-between">
 
-        <div class="card mb-5" style="width: 18rem;" *ngFor="let country of countries">
+        <p *ngIf="errorFlag"> Algo ha salido mal. Comprueba que has escrito bien el nombre del país.</p>
 
-            <img class="card-img-top " src={{country.flag}} alt="Card image cap ">
+        <div class="card mb-5 col-sm-12 col-md-4 col-lg-3" *ngFor="let country of countries">
+
+            <img class="card-img-top max mh-100 " src={{country.flag}} alt="Card image cap ">
             <div class="card-body ">
                 <h5 class="card-title ">{{country.name}}</h5>
                 <p class="card-text "> <b>Capital: </b> {{country.capital}}</p>
@@ -28,17 +26,13 @@
             <ul class="list-group list-group-flush ">
                 <li class="list-group-item "><b>Languages: </b>
                     <ul>
-                        <li *ngFor="let language of country.languages">
+                        <li *ngFor="let language of country.languages ">
                             {{language.name}}</li>
                     </ul>
 
                     <li class="list-group-item "> <b>Population: </b> {{country.population|number}}</li>
 
-
             </ul>
-
         </div>
-
     </div>
-
 </div>

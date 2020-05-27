@@ -15,62 +15,54 @@ import { ApiCallService } from '../../services/api-call.service';
 })
 export class ResultComponent implements OnInit {
   obs: any;
-
   regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
-
   countryForm: FormGroup;
   selectField: FormControl;
   searchField: FormControl;
-
   countries;
-
-  paises;
-
+  countrySearch;
+  flag = false;
+  newArray;
+  prueba;
+  errorFlag;
 
   constructor(private apiCallService: ApiCallService) {}
 
-
   ngOnInit() {
-    this.selectField = new FormControl(),
-    this.searchField = new FormControl(),
-    this.countryForm = new FormGroup({
-      selectField : this.selectField,
-      searchField : this.searchField,
-    });
-    
+    (this.selectField = new FormControl()),
+      (this.searchField = new FormControl()),
+      (this.countryForm = new FormGroup({
+        selectField: this.selectField,
+        searchField: this.searchField,
+      }));
     this.getRegion();
-    // this.searchCountry();
-
-    // this.countryForm.reset();
-
+    this.searchCountry();
   }
 
-
-  getRegion(){
-
+  getRegion() {
     this.selectField.valueChanges.subscribe((region) => {
-
-      this.apiCallService.getRegion(region).subscribe((data) =>{
-
-          console.log(data);
-
-          this.countries = data;
-
+      this.flag = true;
+      this.apiCallService.getRegion(region).subscribe((data) => {
+        this.countries = data;
       });
-  });
-
+    });
   }
 
   searchCountry() {
-
     this.searchField.valueChanges
       .pipe(debounceTime(400))
       .pipe(distinctUntilChanged())
       .subscribe((term) => {
-        console.log(term);
-        this.apiCallService
-          .getInfo(term)
-          .subscribe((paises) => console.log(paises));
+        this.countrySearch = term;
+        this.apiCallService.getCountry(this.countrySearch).subscribe((data) => {
+          try {
+            this.countries = data;
+            console.log('NO HAY ERROR');
+          } catch (error) {
+            this.errorFlag = error;
+            console.log('HAY ERROR');
+          }
+        });
       });
   }
 }
